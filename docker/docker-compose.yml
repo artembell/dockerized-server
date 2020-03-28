@@ -7,7 +7,7 @@ services:
         - "8001:80"
         volumes:
         - "./nginx/config:/etc/nginx/conf.d"
-        - "./nginx/www/:/var/www"
+        - "../www/:/var/www"
         links:
             - php-fpm
 
@@ -15,4 +15,4 @@ services:
         image: php:7-fpm
         container_name: php-fpm
         volumes: 
-        - "./nginx/www/:/var/www"
+        - "../www/:/var/www"
