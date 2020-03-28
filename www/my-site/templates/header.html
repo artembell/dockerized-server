@@ -1,0 +1,11 @@
+<nav>
+  <ul>
+    {% for link in links %} 
+        {% if contentPage == link.location %}
+            <li class="active"><a href="{{link.location}}">{{link.text}}</a></li>
+        {% else %}
+            <li><a href="{{link.location}}">{{link.text}}</a></li>
+        {% endif %} 
+    {% endfor %}
+  </ul>
+</nav>

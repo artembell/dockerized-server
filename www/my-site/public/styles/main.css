@@ -1,0 +1,21 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-size: 20px;
+}
+ 
+ul {
+    display: flex;
+    
+} 
+
+li {
+    display: inline-block;
+    margin-right: 20px;
+    padding: 10px;
+    list-style: none;
+}

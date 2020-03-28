@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+      }
+
+      body {
+        font-size: 20px;
+      }
+
+      ul {
+        display: flex;
+        padding: 10px;
+        background: black;
+        font-size: 30px;
+      }
+
+      ul a {
+        color: white
+      }
+
+      li {
+        display: inline-block;
+        margin-right: 20px;
+        padding: 10px;
+        border-radius: 5px;
+        list-style: none;
+      }
+
+      li.active {
+        background: white;
+      }
+
+      li.active a {
+        color: black;
+      }
+
+      main {
+        padding: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    {% include ("header.html") with links %}
+    
+  </body>
+</html>
