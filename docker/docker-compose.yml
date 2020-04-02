@@ -9,7 +9,7 @@ services:
         - "./nginx/config:/etc/nginx/conf.d"
         - "../www/:/var/www"
         links:
-            - php-fpm
+        - php-fpm
 
     php-fpm:
         image: php:7-fpm
