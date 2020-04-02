@@ -1,5 +1,3 @@
 <main>
-<?php
-    echo "<h1>Contacts page</h1>";
-?>
+<?= '<h1>Contacts</h1>' ?>
 </main>

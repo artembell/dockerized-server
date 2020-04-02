@@ -1,5 +1,3 @@
 <main>
-<?php
-    echo "<h1>Supports page</h1>";
-?>
+<?= '<h1>Support</h1>' ?>
 </main>
