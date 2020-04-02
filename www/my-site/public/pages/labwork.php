@@ -1,6 +1,6 @@
 <main>
-    <h1>Labwork #2</h1>
-    <form action='/labwork-2' method='GET'>
+    <h1>Labwork</h1>
+    <form action='/labwork' method='GET'>
         <label for='first'>First array</label>
         <input id='first' name='first-array' type='text'/>
 

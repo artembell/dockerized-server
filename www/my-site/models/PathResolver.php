@@ -22,24 +22,8 @@ class PathResolver
                 'location' => '/home',
             ],
             [
-                'text' => 'About',
-                'location' => '/about',
-            ],
-            [
-                'text' => 'Support',
-                'location' => '/support',
-            ],
-            [
-                'text' => 'Pricing',
-                'location' => '/pricing',
-            ],
-            [
-                'text' => 'Contacts',
-                'location' => '/contacts',
-            ],
-            [
-                'text' => 'Labwork #2',
-                'location' => '/labwork-2',
+                'text' => 'Labwork',
+                'location' => '/labwork',
             ],
         ];
     }
