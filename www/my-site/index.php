@@ -4,6 +4,7 @@ use models\PathResolver;
 
 require_once __DIR__ . '/bootstrap.php';
 require_once 'models/PathResolver.php';
+require_once 'models/FormValidator.php';
 
 $pathResolver = new PathResolver(
     $serverRoot = $_SERVER['DOCUMENT_ROOT'],
@@ -16,4 +17,4 @@ echo $twig->render('index.html', [
     'links' => $pathResolver->getLinks()
 ]);
 
-require_once($pathResolver->resolvePathTo($targetPage));
+require_once($pathResolver->resolvePathToPage($targetPage));

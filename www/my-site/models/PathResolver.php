@@ -33,7 +33,12 @@ class PathResolver
         return $this->links;
     }
 
-    public function resolvePathTo(string $target): string
+    public function getRootPath(): string
+    {
+        return $this->serverRoot;
+    }
+
+    public function resolvePathToPage(string $target): string
     {
         $absolutePagesPath = $this->serverRoot.'/'.$this->serverPagesDir;
         $absolutePath = $absolutePagesPath.'/'.$target.'.php';
@@ -49,5 +54,10 @@ class PathResolver
         }
 
         return $absolutePagesPath.'/'.$finalTarget.'.php';
+    }
+
+    public function resolvePathToFile(string $path): string
+    {
+        $absolutePagesPath = $this->serverRoot.'/'.$this->path;
     }
 }
