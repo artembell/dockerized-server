@@ -4,6 +4,7 @@ use models\PathResolver;
 
 require_once __DIR__ . '/bootstrap.php';
 require_once 'models/PathResolver.php';
+require_once 'models/TextFormatter.php';
 
 $pathResolver = new PathResolver(
     $serverRoot = $_SERVER['DOCUMENT_ROOT'],
