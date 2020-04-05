@@ -6,13 +6,13 @@
 use models\FormValidator;
 
 $formValidator = new FormValidator(
-    $inputNamesToValidate = ['path'],
+    ['path'],
     $root = $pathResolver->getRootPath()
 );
 
-function getOldValueByInputKey($inputKey): string
+function getOldValueByInputKey($inputName): string
 {
-    return isset($_POST[$inputKey]) ? $_POST[$inputKey] : '';
+    return isset($_POST[$inputName]) ? $_POST[$inputName] : '';
 }
 
 $formValidator->validateInput($_POST);
@@ -21,9 +21,12 @@ $formValidator->validateInput($_POST);
 
     <form method='POST' action='labwork'>
         <label for='path'>Enter absolute path to the folder (e.g. '/' or '/public/pages'):</label>
-        <input id='path' name='path' type='text' 
+        <input id='path'
+            name='path'
+            type='text' 
             class="<?= $formValidator->getCorrectnessClass('path') ?>" 
-            value="<?= getOldValueByInputKey('path') ?>"/>
+            value="<?= getOldValueByInputKey('path') ?>"
+            autofocus/>
 
         <div class='path-errors'>
             <?= $formValidator->getErrorsInfo('path') ?>
@@ -36,24 +39,21 @@ $formValidator->validateInput($_POST);
 function printFolderDataTable(array $data): void
 {
     echo '<table>';
-    echo '<tr>' . '<th>Name</th>' . '<th>Size (bytes)</th>' . '</tr>';
+    echo '<tr><th>Name</th><th>Size (bytes)</th></tr>';
     foreach ($data['files'] as $file) {
-        echo '<tr>' . '<td>' . $file['path'] . '</td>' . '<td>' . $file['size'] . '</td>' . '</tr>';
+        echo '<tr><td>' . $file['path'] . '</td><td>' . $file['size'] . '</td></tr>';
     }
-    echo '<tr>' . '<td>' . 'Total file size:' . '</td>' . '<td>' . $data['totalFileSize'] . '</td>' . '</tr>';
+    echo '<tr><td>Total file size:</td><td>' . $data['totalFileSize'] . '</td></tr>';
     echo '</table>';
-}
-
-function filterFiles(string $name): bool
-{
-    return $name !== '.' && $name !== '..';
 }
 
 function getFolderSize(string $path): int
 {
     $innerFiles = scandir($path);
     $totalFolderSize = 0;
-    $filteredFiles = array_filter($innerFiles, 'filterFiles');
+    $filteredFiles = array_filter($innerFiles, function (string $name): bool {
+        return $name !== '.' && $name !== '..';
+    });
 
     foreach ($filteredFiles as $filename) {
         $newPath = $path.'/'.$filename;
@@ -67,7 +67,9 @@ function analyzeFolder(string $absolutePath, string $rootPath): array
 {
     $fullTargetPath = $rootPath.$absolutePath;
     $searchResults = scandir($fullTargetPath);
-    $filteredFiles = array_filter($searchResults, 'filterFiles');
+    $filteredFiles = array_filter($searchResults, function (string $name): bool {
+        return $name !== '.' && $name !== '..';
+    });
 
     $files = [];
     $totalFileSize = 0;
@@ -88,7 +90,7 @@ function analyzeFolder(string $absolutePath, string $rootPath): array
     ];
 }
 
-if ($formValidator->isCorrectInput('path')) {
+if ($formValidator->formHasCorrectInput()) {
     $specifiedPath = $_POST['path'];
 
     $folderAnalysis = analyzeFolder($specifiedPath, $pathResolver->getRootPath());
