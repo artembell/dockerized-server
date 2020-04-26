@@ -36,15 +36,9 @@ $formValidator->validateInput($_POST);
     </form>
 <?php
 
-function printFolderDataTable(array $data): void
+function printFolderDataTable(array $data, object $twig): void
 {
-    echo '<table>';
-    echo '<tr><th>Name</th><th>Size (bytes)</th></tr>';
-    foreach ($data['files'] as $file) {
-        echo '<tr><td>' . $file['path'] . '</td><td>' . $file['size'] . '</td></tr>';
-    }
-    echo '<tr><td>Total file size:</td><td>' . $data['totalFileSize'] . '</td></tr>';
-    echo '</table>';
+    echo $twig->render('folder_table.html', ['data' => $data]);
 }
 
 function getFolderSize(string $path): int
@@ -94,7 +88,7 @@ if ($formValidator->formHasCorrectInput()) {
     $specifiedPath = $_POST['path'];
 
     $folderAnalysis = analyzeFolder($specifiedPath, $pathResolver->getRootPath());
-    printFolderDataTable($folderAnalysis);
+    printFolderDataTable($folderAnalysis, $twig);
 }
 
 ?>

@@ -1,0 +1,13 @@
+<table>
+    <tr><th>Name</th><th>Size (bytes)</th></tr>
+    {% for file in data['files'] %}
+        <tr>
+            <td>{{file['path']}}</td>
+            <td>{{file['size']}}</td>
+        </tr>
+    {% endfor %}
+    <tr>
+        <td>Total file size:</td>
+        <td>{{data['totalFileSize']}}</td>
+    </tr>
+</table>
