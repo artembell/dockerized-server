@@ -22,7 +22,6 @@ function getOldValueByInputKey($inputKey): string
     </form>
 <?php
 
-
 $text = isset($_POST['user-text']) ? $_POST['user-text'] : '';
 $formatter = new TextFormatter();
 
