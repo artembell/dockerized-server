@@ -1,0 +1,25 @@
+<h3>Current cookies:</h3>
+<table>
+    <tr>
+        <th></th>
+        <th>Name</th>
+        <th>Value</th>
+    </tr>
+    {% for name, value in cookies %}
+    <tr>
+        <td>
+        {% if name not in predefined %}
+            <form action="labwork" method="post">
+                <input
+                    type="hidden"
+                    name="delete"
+                    value={{name}}
+                /><button>delete</button>
+            </form>
+        {% endif %}
+        </td>
+        <td>{{name}}</td>
+        <td>{{value}}</td>
+    </tr>
+    {% endfor %}
+</table>
