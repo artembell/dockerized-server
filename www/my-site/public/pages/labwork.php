@@ -17,7 +17,8 @@ if ($mysqli->connect_errno) {
     . $mysqli->connect_error . "\n";
 } else {
     if ($mysqli->set_charset("utf8")) {
-        function query(string $query, object $mysqli): void {
+        function query(string $query, object $mysqli): void
+        {
             if ($result = $mysqli->query($query)) {
                 echo '<br>';
                 while ($country = $result->fetch_assoc()) {
