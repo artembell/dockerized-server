@@ -24,16 +24,18 @@ function trimValue(string $value): string
 function saveCookie(string $name, string $value, int $age): void
 {
     setcookie(trimValue($name), trimValue($value), time() + $age);
+    header('Location: '.$_SERVER['HTTP_ORIGIN'].$_SERVER['REQUEST_URI']);
 }
 
 function deleteCookie(string $name)
 {
     setcookie($name, '', 0);
+    header('Location: '.$_SERVER['HTTP_ORIGIN'].$_SERVER['REQUEST_URI']);
 }
 
 if (isset($_POST['save'])) {
     $cookieName = isset($_POST['name']) ? htmlspecialchars($_POST['name']) : '';
-    $cookieValue = isset($_POST['name']) ? htmlspecialchars($_POST['name']) : '';
+    $cookieValue = isset($_POST['value']) ? htmlspecialchars($_POST['value']) : '';
     $cookieAge = isset($_POST['age']) ? htmlspecialchars($_POST['age']) : 0;
 
     if ($cookieName !== '' && $cookieValue !== '' && $cookieAge !== 0) {
