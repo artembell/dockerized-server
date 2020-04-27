@@ -39,7 +39,7 @@ if (isset($_POST['save'])) {
     if ($cookieName !== '' && $cookieValue !== '' && $cookieAge !== 0) {
         saveCookie($cookieName, $cookieValue, $cookieAge);
     }
-} else if (isset($_POST['delete'])) {
+} elseif (isset($_POST['delete'])) {
     $cookieName = isset($_POST['delete']) ? htmlspecialchars($_POST['delete']) : '';
     deleteCookie($cookieName);
 }
