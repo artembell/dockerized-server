@@ -9,7 +9,7 @@
 
 <?php
 
-$mysqli = new mysqli('localhost', 'admin', 'rootroot', 'labwork5');
+$mysqli = new mysqli('localhost', getenv('DEV_USER'), getenv('DEV_USER_PASSWORD'), 'labwork5');
 
 if ($mysqli->connect_errno) {
     echo "Error (code: "
