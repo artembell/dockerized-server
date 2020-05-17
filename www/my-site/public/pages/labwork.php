@@ -16,7 +16,7 @@ function mailUser($to, $text): bool
 
 $isCaptchaCorrect = false;
 if ($to && $text && $captchaInput && $captchaPostedKey) {
-    if (intval($captchaPostedKey) == intval($captchaInput)) {
+    if ($captchaPostedKey == hash("md5", $captchaInput)) {
         $isCaptchaCorrect = true;
         if (mailUser("test@example.com", "hello there")) {
             echo "Email has been sent.";
@@ -79,7 +79,7 @@ $captchaKey = generateCaptcha();
     <input name="captcha" id="captcha" type="text" required><br>
     <span class="captcha-status"><?= $isCaptchaCorrect ? "" : "Captcha was entered incorrectly"; ?></span>
 
-    <input type="hidden" name="captcha-key" value="<?= $captchaKey ?>">
+    <input type="hidden" name="captcha-key" value="<?= hash("md5", $captchaKey); ?>">
     
     <button>Submit</button>
 </form>
