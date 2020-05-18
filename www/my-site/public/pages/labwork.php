@@ -4,13 +4,13 @@
 <?php
 
 $to = isset($_POST['to']) ? $_POST['to'] : null;
+$subject = isset($_POST['subject']) ? $_POST['subject'] : null;
 $text = isset($_POST['text']) ? $_POST['text'] : null;
 $captchaInput = isset($_POST['captcha']) ? $_POST['captcha'] : null;
 $captchaPostedKey = isset($_POST['captcha-key']) ? $_POST['captcha-key'] : null;
 
-function mailUser($to, $text): bool
+function mailUser($to, $subject, $text): bool
 {
-    $subject = "Mail subject";
     return mail($to, $subject, $text);
 }
 
@@ -18,7 +18,7 @@ $isCaptchaCorrect = false;
 if ($to && $text && $captchaInput && $captchaPostedKey) {
     if ($captchaPostedKey == hash("md5", $captchaInput)) {
         $isCaptchaCorrect = true;
-        if (mailUser("test@example.com", "hello there")) {
+        if ($to && $subject && $text && mailUser($to, $subject, $text)) {
             echo "Email has been sent.";
         } else {
             echo "Error while sending message.";
@@ -26,6 +26,7 @@ if ($to && $text && $captchaInput && $captchaPostedKey) {
     }
 
     unset($_POST['to']);
+    unset($_POST['subject']);
     unset($_POST['text']);
     unset($_POST['captcha']);
     unset($_POST['captcha-key']);
@@ -70,6 +71,9 @@ $captchaKey = generateCaptcha();
 <form action="labwork" method="post">
 	<label for="to">To:</label>
 	<input name="to" id="to" type="email" required><br>
+
+    <label for="subject">Subject:</label>
+	<input name="subject" id="subject" type="text" required><br>
 
 	<label for="text">Text:</label>
 	<textarea name="text" id="text" cols="30" rows="10" required></textarea><br>
